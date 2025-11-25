@@ -33,7 +33,7 @@ public class FakeStoreProductService implements IProductService {
         );
         List<Product> products = new ArrayList<>();
         for(ProductDto pdto : response.getBody()){
-            Product product = convertProductDtoToProduct(pdto);
+            Product product = Product.from(pdto);
             products.add(product);
         }
         return products;
@@ -42,11 +42,11 @@ public class FakeStoreProductService implements IProductService {
     @Override
     public Product getSingleProduct(Long productId) {
         ResponseEntity<ProductDto> responseEntity = restTemplate.getForEntity("https://fakestoreapi.com/products/" + productId, ProductDto.class);
-        return convertProductDtoToProduct(responseEntity.getBody());
+        return Product.from(responseEntity.getBody());
     }
 
     @Override
-    public Product createProduct(Product product) {
+    public Product createProduct(Product product, String categoryName) {
         return null;
     }
 
@@ -55,16 +55,9 @@ public class FakeStoreProductService implements IProductService {
         return null;
     }
 
-    private Product convertProductDtoToProduct(ProductDto productDto) {
+    @Override
+    public Product deleteProduct(Long productId) {
         return null;
-//        Product product = new Product();
-//        product.setId(productDto.getId());
-//        product.setProductName(productDto.getTitle());
-//        product.setDescription(productDto.getDescription());
-//        product.setPrice(productDto.getPrice());
-//        Category category = new Category();
-//        category.setCategoryName(productDto.getCategory());
-//        product.setCategory( category);
-//        return product;
     }
+
 }

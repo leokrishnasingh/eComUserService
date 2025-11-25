@@ -9,7 +9,10 @@ public interface IProductService {
 
     Product getSingleProduct(Long productId);
 
-    Product createProduct(Product product);
+    Product createProduct(Product product, String categoryName);
 
     Product replaceProduct(Long productId, Product product);
+
+    Product deleteProduct(Long productId);
+
 }
